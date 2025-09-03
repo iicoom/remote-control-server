@@ -1,0 +1,76 @@
+{
+  "name": "remote-control-server",
+  "version": "1.3.3",
+  "description": "Remote control your PC from your web browser on your other PC or mobile device",
+  "repository": "https://github.com/jeremija/remote-control-server",
+  "main": "src/index.js",
+  "bin": {
+    "remote-control-server": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "start:server": "nodemon src/index.js -i src/client -i src/scss -i src/res",
+    "start:watch": "chastifol [ npm run js:watch ] [ npm run css:watch ] [ npm run start:server ]",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "build": "npm run css && npm run js",
+    "js": "browserify -t babelify src/client/index.js -o src/res/index.js",
+    "js:watch": "watchify -d -v -t babelify src/client/index.js -o src/res/index.js",
+    "css": "sass src/scss/style.scss src/res/style.css",
+    "css:watch": "npm run css && sass --watch src/scss/style.scss:src/res/style.css",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "ci": "npm run lint && npm run test:coverage && npm run build"
+  },
+  "author": "Jerko Steiner",
+  "license": "MIT",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "express": "^4.16.2",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.6.0",
+    "pug": "^2.0.0-rc.4",
+    "raf": "^3.4.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "robotjs": "^0.6.0",
+    "seamless-immutable": "^7.1.2",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.3",
+    "babel-jest": "^21.2.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^8.0.0",
+    "browserify": "^14.5.0",
+    "chastifol": "^4.1.0",
+    "eslint": "^4.13.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest-cli": "^21.2.1",
+    "nodemon": "^1.12.5",
+    "sass": "^1.69.0",
+    "watchify": "^3.9.0"
+  },
+  "jest": {
+    "transform": {
+      "src/client/.*\\.js$": "<rootDir>/node_modules/babel-jest"
+    },
+    "setupFiles": [
+      "raf/polyfill"
+    ]
+  }
+}

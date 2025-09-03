@@ -1,0 +1,17 @@
+{
+  "extends": ["standard", "standard-react"],
+  "globals": {
+    "jest": true,
+    "jasmine": true,
+    "it": true,
+    "expect": true,
+    "describe": true,
+    "beforeEach": true,
+    "afterEach": true
+  },
+  "rules": {
+    "max-len": [2, 80, 4],
+    "indent": ["error", 2, {"MemberExpression": 0, "SwitchCase": 1}],
+    "padded-blocks": 0
+  }
+}
